@@ -1,0 +1,20 @@
+{
+  "type": "postgres",
+  "host": "192.168.0.9",
+  "port": 5432,
+  "username": "postgres",
+  "password": "123456",
+  "database": "mussum",
+  "entities": [
+    "src/models/**/*.ts"
+  ],
+  "migrations": [
+    "src/migrations/**/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": [
+      "src/migrations/"
+    ],
+    "entitiesDir": "src/models"
+  }
+}
