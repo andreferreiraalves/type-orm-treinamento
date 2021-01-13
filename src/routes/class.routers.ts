@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import { getRepository, Like } from 'typeorm';
+import { getCustomRepository, getRepository, Like } from 'typeorm';
 import routes from '.';
 import { Class } from '../models/Class';
+import ClassRepository from '../repositories/ClassRepository';
 
 const classRouter = Router();
 
@@ -12,6 +13,7 @@ classRouter.post('/', async (request, response) => {
         return response.status(201).json(res);
     } catch (error) {
         console.log('error.message => ' + error.message);
+        return response.status(400).send();
     }
 });
 
@@ -21,13 +23,8 @@ classRouter.get('/', async (request, response) => {
 });
 
 classRouter.get('/:name', async (request, response) => {
-    const repo = getRepository(Class);
-    const retorno = await repo.find({
-        where: {
-            name: Like(request.params.name)
-        }
-    });
-
+    const repo = getCustomRepository(ClassRepository);
+    const retorno = await repo.findByName(request.params.name);
     response.json(retorno);
 });
 
