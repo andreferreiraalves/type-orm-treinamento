@@ -13,8 +13,10 @@ studentCounter.post('/', async (request, response) => {
         const student = respo.create({ key, name, email });
         const erros = await validate(student);
 
-        if (erros.length != 0)
-            return response.json(erros);
+        if (erros.length != 0) {
+            // return response.status(400).json(erros.map(v => v.constraints));
+            return response.status(400).json(erros);
+        }
 
         const studentSaved = await respo.save(student);
         return response.status(201).json(studentSaved);

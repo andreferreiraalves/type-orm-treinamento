@@ -8,17 +8,17 @@ export default class Estudent {
     id: number;
 
     @Column()
-    @MaxLength(50)
-    @MinLength(2)
+    @MaxLength(50, { message: 'Um nome precisa ter no máximo 50 caracteres' })
+    @MinLength(2, { message: 'Um nome precisa ter no mínimo 2 caracteres' })
     name: string;
 
     @Column()
-    @Max(9999)
-    @Min(3)
+    @Max(9999, { message: 'Key precisa possuir no máximo 9999 caracteres' })
+    @Min(3, { message: 'Key precisa possuir no mínimo 2 caracteres' })
     key: string;
 
     @Column()
-    @IsEmail()
+    @IsEmail({}, { message: 'Informe um e-mail válido' })
     email: string;
 
     @CreateDateColumn({ name: 'created_at' })
